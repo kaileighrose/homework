@@ -4,6 +4,9 @@
 // Display the household list in the HTML as it is modified
 // Serialize the household as JSON upon form submission as a fake trip to the server// your code goes here ...
 
+// Store Family Data for Session in hash
+	var family = {};
+
 // Get Form Data from DOM
 	function getFormData(data) {
 		console.log('the listener works');
@@ -14,21 +17,30 @@
 	function validator(data) {
 
 	}
-// Serialize Data
-	function serializer(argument) {
+// Serialize Data and Display in Debug Element
+	function serializer() {
 		// body...
 	}
-// Display Data if validateed
-	function displayData(argument) {
-		// body...
+// Display Data in household list if validateed
+	function displayData() {
+		var list = document.getElementsByClassName("household");
+		if (family.length > 0) {
+			console.log("went into has family");
+			Object.keys(family).forEach(function(id) {
+
+			})
+		} else {
+			list[0].innerHTML = "<h4>Add a family member to your household to see them here</h4>";
+		}
 	}
 // Add family member to list
 	function addMember(argument) {
 		// body...
 	}
 // Remove family member from list
-	function removeMember(argument) {
-		// body...
+	function removeMember(id) {
+		delete family[id.toString()];
+		displayData();
 	}
 // Puts it all together for execution
 	function familyManager(argument) {
@@ -40,10 +52,12 @@
 	form.addEventListener("add", function(event) {
 		event.preventDefault();
 		getFormData(this);
+		displayData();
 	});
 
 	form.addEventListener("submit", function(event) {
 		event.preventDefault();
 		getFormData(this);
+		displayData();
 	});
 	
