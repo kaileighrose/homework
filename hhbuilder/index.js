@@ -5,7 +5,7 @@
 // Serialize the household as JSON upon form submission as a fake trip to the server// your code goes here ...
 
 // Store Family Data for Session in hash
-	var family = {};
+	var family = [];
 
 // Get Form Data from DOM
 	function getFormData(data) {
@@ -19,16 +19,26 @@
 	}
 // Serialize Data and Display in Debug Element
 	function serializer() {
-		// body...
+		var serializedData = JSON.stringify("Hi, I'm JSON");
+		var display = document.getElementsByClassName("debug");
+		display[0].textContent = serializedData;
 	}
 // Display Data in household list if validateed
 	function displayData() {
 		var list = document.getElementsByClassName("household");
+		family.push('me');
 		if (family.length > 0) {
-			console.log("went into has family");
-			Object.keys(family).forEach(function(id) {
-
-			})
+			for (var i = 0; i < family.length; i++) {
+				var member = document.createElement("LI");
+				var relation = document.createTextNode("relationship | " + "Age: " + " age " + "| Smoker? " + " smoker |  ");
+				var button = document.createElement("BUTTON");
+				button.setAttribute("id", "remove");
+				var text = document.createTextNode("Remove");
+				member.appendChild(relation);
+				button.appendChild(text);
+				member.appendChild(button);
+				list[0].appendChild(member);
+			}
 		} else {
 			list[0].innerHTML = "<h4>Add a family member to your household to see them here</h4>";
 		}
@@ -59,5 +69,6 @@
 		event.preventDefault();
 		getFormData(this);
 		displayData();
+		serializer();
 	});
 	
